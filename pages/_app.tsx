@@ -23,10 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<AppShell
 				styles={{
 					main: {
-						background:
-							theme.colorScheme === "dark"
-								? theme.colors.dark[8]
-								: theme.colors.gray[0],
+						background: theme.colors.dark[8]
 					},
 				}}
 				navbarOffsetBreakpoint="sm"
@@ -35,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						p="md"
 						hiddenBreakpoint="sm"
 						hidden={!opened}
-						width={{ sm: 200, lg: 300 }}
+						width={{ base: 200 }}
 					>
 						<Text>Application navbar</Text>
 					</Navbar>
