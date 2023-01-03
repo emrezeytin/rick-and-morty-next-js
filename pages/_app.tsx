@@ -8,8 +8,20 @@ import {
 	Burger,
 	useMantineTheme,
 	MantineProvider,
+	NavLink,
 } from "@mantine/core";
 import type { AppProps } from "next/app";
+import {
+	IconDeviceTv,
+	IconHome2,
+	IconLayoutList,
+	IconLocation,
+	IconMapPin,
+	IconSettings,
+	IconUsers,
+} from "@tabler/icons";
+import { ApolloProvider } from "@apollo/client";
+import client from "../lib/apolloClient";
 
 export default function App({ Component, pageProps }: AppProps) {
 	const theme = useMantineTheme();
@@ -23,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<AppShell
 				styles={{
 					main: {
-						background: theme.colors.dark[8]
+						background: theme.colors.dark[8],
 					},
 				}}
 				navbarOffsetBreakpoint="sm"
@@ -33,21 +45,92 @@ export default function App({ Component, pageProps }: AppProps) {
 						hiddenBreakpoint="sm"
 						hidden={!opened}
 						width={{ base: 200 }}
+						height="100vh"
 					>
-						<Text>Application navbar</Text>
+						<NavLink
+							label="Home"
+							component="a"
+							href="/"
+							icon={
+								<IconHome2
+									size={16}
+									stroke={1.5}
+								/>
+							}
+						/>
+						<NavLink
+							label="Characters"
+							component="a"
+							href="/characters"
+							icon={
+								<IconUsers
+									size={16}
+									stroke={1.5}
+								/>
+							}
+						/>
+						<NavLink
+							label="Locations"
+							component="a"
+							href="/locations"
+							icon={
+								<IconMapPin
+									size={16}
+									stroke={1.5}
+								/>
+							}
+						/>
+						<NavLink
+							label="Episodes"
+							component="a"
+							href="/episodes"
+							icon={
+								<IconDeviceTv
+									size={16}
+									stroke={1.5}
+								/>
+							}
+						/>
+						<NavLink
+							label="My Lists"
+							component="a"
+							href="/lists"
+							icon={
+								<IconLayoutList
+									size={16}
+									stroke={1.5}
+								/>
+							}
+						/>
+						<NavLink
+							label="Settings"
+							component="a"
+							href="/settings"
+							icon={
+								<IconSettings
+									size={16}
+									stroke={1.5}
+								/>
+							}
+						/>
 					</Navbar>
 				}
 				header={
-					<Header
-						height={{ base: 50, md: 70 }}
-						p="md"
+					<MediaQuery
+						largerThan="sm"
+						styles={{ display: "none" }}
 					>
-						<div
-							style={{ display: "flex", alignItems: "center", height: "100%" }}
+						<Header
+							height={{ base: 50, sm: "auto" }}
+							p="md"
 						>
-							<MediaQuery
-								largerThan="sm"
-								styles={{ display: "none" }}
+							<div
+								style={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "flex-end",
+									height: "100%",
+								}}
 							>
 								<Burger
 									opened={opened}
@@ -56,13 +139,15 @@ export default function App({ Component, pageProps }: AppProps) {
 									color={theme.colors.gray[6]}
 									mr="xl"
 								/>
-							</MediaQuery>
-							<Text>Application header</Text>
-						</div>
-					</Header>
+								<Text>Application header</Text>
+							</div>
+						</Header>
+					</MediaQuery>
 				}
 			>
-				<Component {...pageProps} />
+				<ApolloProvider client={client}>
+					<Component {...pageProps} />
+				</ApolloProvider>
 			</AppShell>
 		</MantineProvider>
 	);
