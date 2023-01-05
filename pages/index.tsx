@@ -6,14 +6,13 @@ import {
 	Card,
 	Grid,
 	Pagination,
-	Skeleton,
 	LoadingOverlay,
 } from "@mantine/core";
-import client from "../lib/apolloClient";
 import { statusColor } from "../helpers/statusColor";
 import { useState } from "react";
 import { ALL_CHARACTERS_QUERY } from "../lib/apolloQueries";
 import { useQuery } from "@apollo/client";
+import Link from "next/link";
 
 export default function Home() {
 	const [activePage, setPage] = useState(1);
@@ -82,6 +81,7 @@ export default function Home() {
 									Seen on {item.episode.length}{" "}
 									{item.episode.length === 1 ? "episode" : "episodes"}.
 								</Text>
+                <Link href="/character/[id]" as={`/character/${item.id}`}>Detail</Link>
 							</Card>
 						</Grid.Col>
 					);
@@ -96,16 +96,3 @@ export default function Home() {
 		</>
 	);
 }
-
-// export async function getServerSideProps({ params }: any) {
-// 	const { data } = await client.query({
-// 		query: ALL_CHARACTERS_QUERY,
-//     variables: {page: 1 }
-// 	});
-
-// 	return {
-// 		props: {
-// 			characters: data.characters,
-// 		},
-// 	};
-// }
