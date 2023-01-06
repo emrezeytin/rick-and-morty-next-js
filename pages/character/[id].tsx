@@ -12,7 +12,7 @@ import { SINGLE_CHARACTER_QUERY } from "lib/apolloQueries";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
-function Character() {
+export default function Character() {
 	const router = useRouter();
 	const characterId = router.query.id;
 	const { data, loading } = useQuery(SINGLE_CHARACTER_QUERY, {
@@ -35,6 +35,4 @@ function Character() {
 			</Grid>
 		</>
 	);
-}
-
-export default Character;
+};

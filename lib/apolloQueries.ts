@@ -52,19 +52,19 @@ export const SINGLE_CHARACTER_QUERY = gql`
 `;
 
 export const ALL_EPISODES_QUERY = gql`
-	query characters($page: Int) {
-		characters(page: $page) {
+	query episodes($page: Int) {
+		episodes(page: $page) {
 			results {
 				id
 				name
-				status
-				species
-				type
-				gender
-				image
-				episode {
+				episode
+				air_date
+				characters {
+					name
 					id
+					image
 				}
+				created
 			}
 			info {
 				pages
@@ -88,6 +88,45 @@ export const SINGLE_EPISODE_QUERY = gql`
 				image
 			}
 			created
+		}
+	}
+`;
+
+export const ALL_LOCATIONS_QUERY = gql`
+	query locations($page: Int) {
+		locations(page: $page) {
+			results {
+				id
+				name
+				type
+				dimension
+				residents {
+					id
+					name
+					image
+				}
+			}
+			info {
+				pages
+				next
+				prev
+			}
+		}
+	}
+`;
+
+export const SINGLE_LOCATION_QUERY = gql`
+	query location($id: ID!) {
+		location(id: $id) {
+			id
+			name
+			type
+			dimension
+			residents {
+				id
+				name
+				image
+			}
 		}
 	}
 `;

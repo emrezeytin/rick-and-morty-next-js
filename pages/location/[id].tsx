@@ -7,15 +7,15 @@ import {
 	Grid,
 	LoadingOverlay,
 } from "@mantine/core";
-import { SINGLE_EPISODE_QUERY } from "lib/apolloQueries";
+import { SINGLE_LOCATION_QUERY } from "lib/apolloQueries";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
-export default function Episode() {
+export default function Location() {
 	const router = useRouter();
-	const episodeId = router.query.id;
-	const { data, loading } = useQuery(SINGLE_EPISODE_QUERY, {
-		variables: { id: episodeId as ID },
+	const locationId = router.query.id;
+	const { data, loading } = useQuery(SINGLE_LOCATION_QUERY, {
+		variables: { id: locationId as ID },
 	});
 	return (
 		<>
@@ -28,7 +28,7 @@ export default function Episode() {
 				gutter="md"
 			>
 				<Grid.Col span={12}>
-					<Title order={1}>{data?.episode?.name} - {data?.episode?.episode}</Title>
+					<Title order={1}>{data?.location?.name} - {data?.location?.type}</Title>
 				</Grid.Col>
 			</Grid>
 		</>
