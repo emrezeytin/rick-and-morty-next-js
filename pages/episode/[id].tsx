@@ -7,16 +7,15 @@ import {
 	Grid,
 	LoadingOverlay,
 } from "@mantine/core";
-import { statusColor } from "helpers/statusColor";
-import { SINGLE_CHARACTER_QUERY } from "lib/apolloQueries";
+import { SINGLE_EPISODE_QUERY } from "lib/apolloQueries";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
-function Character() {
+function Episode() {
 	const router = useRouter();
-	const characterId = router.query.id;
-	const { data, loading } = useQuery(SINGLE_CHARACTER_QUERY, {
-		variables: { id: characterId as ID },
+	const episodeId = router.query.id;
+	const { data, loading } = useQuery(SINGLE_EPISODE_QUERY, {
+		variables: { id: episodeId as ID },
 	});
 	console.log(data);
 	return (
@@ -30,11 +29,11 @@ function Character() {
 				gutter="md"
 			>
 				<Grid.Col span={12}>
-					<Title order={1}>{data?.character?.name}</Title>
+					<Title order={1}>{data?.episode?.name} - {data?.episode?.episode}</Title>
 				</Grid.Col>
 			</Grid>
 		</>
 	);
 }
 
-export default Character;
+export default Episode;
