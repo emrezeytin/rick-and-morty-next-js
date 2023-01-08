@@ -46,6 +46,7 @@ export const SINGLE_CHARACTER_QUERY = gql`
 				id
 				name
 				episode
+        air_date
 			}
 		}
 	}
